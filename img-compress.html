@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Free online tool to compress and optimize your images. Reduce file size while maintaining quality. Works with JPG, PNG, and WebP formats.">
-    <meta name="keywords" content="image compressor, optimize images, reduce image size, online image tool, free image compression">
+    <meta name="keywords" content="image compressor, optimize images, reduce image size, online image tool, free image compression, image resizer">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-2185898198124897/2307180669" crossorigin="anonymous"></script>
+    
     <title>ImageCompressPro - Free Online Image Compression Tool</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,6 +125,16 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--dark);
+        }
+
+        /* Ad Container Styles */
+        .ad-container {
+            margin: 30px auto;
+            text-align: center;
+            padding: 20px;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
         }
 
         /* Hero Section */
@@ -627,6 +641,11 @@
             .info-section {
                 padding: 30px;
             }
+            
+            .ad-container {
+                margin: 20px auto;
+                padding: 15px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -711,6 +730,19 @@
     </header>
 
     <main class="container">
+        <!-- Top Ad Unit -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_TOP_AD_SLOT"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
         <section class="hero animate-fade delay-1">
             <h1>Optimize Your Images in Seconds</h1>
             <p>Reduce image file size without losing quality. Perfect for websites, social media, and storage savings.</p>
@@ -804,6 +836,19 @@
             </div>
         </section>
 
+        <!-- Middle Ad Unit -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_MIDDLE_AD_SLOT"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
         <section class="info-section">
             <h2><i class="fas fa-info-circle"></i> How Our Image Compressor Works</h2>
             <p>Our advanced compression algorithm reduces image file size while preserving visual quality. Whether you're optimizing photos for your website, preparing images for social media, or just saving storage space, our tool delivers professional results instantly.</p>
@@ -820,6 +865,19 @@
             <p>Our tool offers precise control over compression settings, allowing you to balance quality and file size perfectly. Choose between different output formats (JPEG, PNG, WebP), adjust compression level, and resize images to exact dimensions - all in one place.</p>
         </section>
     </main>
+
+    <!-- Bottom Ad Unit -->
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+             data-ad-slot="YOUR_BOTTOM_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
     <footer>
         <div class="container">
@@ -1050,78 +1108,3 @@
                     // Calculate size reduction percentage
                     const originalSizeValue = parseFloat(originalSize.textContent);
                     const compressedSizeValue = parseFloat(compressedSize.textContent);
-                    const reduction = ((originalSizeValue - compressedSizeValue) / originalSizeValue * 100).toFixed(2);
-                    sizeReduction.textContent = `${reduction}%`;
-                    
-                    // Animate the success
-                    downloadBtn.classList.add('btn-accent');
-                    downloadBtn.classList.remove('btn-secondary');
-                    downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Optimized Image';
-                    
-                }, mimeType, quality);
-            }
-            
-            function downloadImage() {
-                if (!compressedImageBlob) return;
-                
-                const a = document.createElement('a');
-                const url = URL.createObjectURL(compressedImageBlob);
-                const fileName = fileInput.files[0].name;
-                const fileExt = fileName.split('.').pop();
-                let newFileName = fileName.replace(`.${fileExt}`, '');
-                
-                // Add appropriate extension based on output format
-                const format = document.getElementById('format').value;
-                if (format === 'jpeg' || (format === 'auto' && fileInput.files[0].type !== 'image/png')) {
-                    newFileName += '_optimized.jpg';
-                } else if (format === 'png') {
-                    newFileName += '_optimized.png';
-                } else if (format === 'webp') {
-                    newFileName += '_optimized.webp';
-                } else {
-                    newFileName += '_optimized.' + fileExt;
-                }
-                
-                a.href = url;
-                a.download = newFileName;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            }
-            
-            function resetTool() {
-                fileInput.value = '';
-                originalPreview.src = '#';
-                compressedPreview.src = '#';
-                originalSize.textContent = '0';
-                compressedSize.textContent = '0';
-                sizeReduction.textContent = '0%';
-                originalDimensions.textContent = '0 × 0';
-                compressedDimensions.textContent = '0 × 0';
-                originalType.textContent = 'Unknown';
-                
-                document.getElementById('controls').classList.add('hidden');
-                document.getElementById('previewSection').classList.add('hidden');
-                document.getElementById('actionButtons').classList.add('hidden');
-                
-                // Reset controls to defaults
-                qualitySlider.value = 80;
-                qualityValue.textContent = '80%';
-                resizeSelect.value = '0';
-                customWidth.classList.add('hidden');
-                customWidth.value = '';
-                document.getElementById('format').value = 'auto';
-                
-                // Reset download button
-                downloadBtn.classList.remove('btn-accent');
-                downloadBtn.classList.add('btn-secondary');
-                downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download';
-                
-                originalImage = null;
-                compressedImageBlob = null;
-            }
-        });
-    </script>
-</body>
-</html>
